@@ -15,7 +15,7 @@ def main(args):
     print("Exams: %s" % ", ".join(exams))
     print()
 
-    pairs = data.compare_series(series, args.threshold/len(exams))
+    pairs = data.compare_series(series, args.threshold)
     print("Found %d possible cheating instances:" % len(pairs))
     for s1, s2, _ in sorted(pairs, key=lambda p: p[2], reverse=True):
         header = "%s + %s: %d/%d answers in common" % (
@@ -46,8 +46,9 @@ def main(args):
                 print(header)
                 printed_header = True
 
-            print("  %s: %d/%d answers in common" % (
-                name, sub_s1.common_answers(sub_s2), len(sub_s1.answers)))
+            print("  %s: %d/%d answers in common (scores: %g + %g)" % (
+                name, sub_s1.common_answers(sub_s2), len(sub_s1.answers),
+                r1.score, r2.score))
 
         if printed_header:
             print()

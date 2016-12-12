@@ -35,6 +35,9 @@ class Results:
             for r in user_exams.values():
                 yield r
 
+    def __repr__(self):
+        return "{%s}" % repr(list(self))[1:-1]
+
     def all_exams(self):
         exams = set()
         for user_exams in self._res.values():
